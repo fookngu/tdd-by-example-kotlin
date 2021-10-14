@@ -24,7 +24,7 @@ class MoneyTest {
     }
 
     @Test
-    fun testEquality() {
+    fun testEqualityDollar() {
         assertEquals(Dollar(7), Dollar(7))
         assertNotEquals(Dollar(10), Dollar(20))
     }

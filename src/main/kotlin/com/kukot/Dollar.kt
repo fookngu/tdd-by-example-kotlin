@@ -1,13 +1,9 @@
 package com.kukot
 
-class Dollar(private var amount: Int) {
+class Dollar(amount: Int) : Money(amount) {
 
     fun times(multiplier: Int): Dollar {
         val newAmount = multiplier * amount
         return Dollar(newAmount)
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return other is Dollar && other.amount == amount
     }
 }
