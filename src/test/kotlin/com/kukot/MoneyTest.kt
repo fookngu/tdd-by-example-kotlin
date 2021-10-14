@@ -12,7 +12,7 @@ class MoneyTest {
     // make amount private - DONE
     // dollar side effects - DONE
     // money rounding
-    // Common equals
+    // Common equals - DONE
     // common times
     @Test
     fun testMultiplicationDollar() {
@@ -42,5 +42,10 @@ class MoneyTest {
     fun testEqualityFranc() {
         assertEquals(Franc(7), Franc(7))
         assertNotEquals(Franc(10), Franc(20))
+    }
+
+    @Test
+    fun `5 Dollar is not equals to 5 franc`() {
+        assertNotEquals(Franc(5), Dollar(5))
     }
 }
