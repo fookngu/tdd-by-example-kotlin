@@ -1,8 +1,8 @@
 package com.kukot
 
-class Franc(amount: Int) : Money(amount) {
+class Franc(amount: Int) : Money(amount, currency = Currency.FRANC) {
 
     override fun times(multiplier: Int): Money {
-        return Franc(amount * multiplier)
+        return francOf(amount * multiplier)
     }
 }

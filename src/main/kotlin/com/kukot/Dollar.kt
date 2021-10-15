@@ -1,9 +1,8 @@
 package com.kukot
 
-class Dollar(amount: Int) : Money(amount) {
+class Dollar(amount: Int) : Money(amount, currency = Currency.DOLLAR) {
 
     override fun times(multiplier: Int): Money {
-        val newAmount = multiplier * amount
-        return Dollar(newAmount)
+        return dollarOf(amount * multiplier)
     }
 }

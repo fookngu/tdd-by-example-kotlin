@@ -44,4 +44,10 @@ class MoneyTest {
     fun `5 Dollar is not equals to 5 franc`() {
         assertNotEquals(Money.francOf(5), Money.dollarOf(5))
     }
+
+    @Test
+    fun testCurrencies() {
+        assertEquals(Currency.DOLLAR, Money.dollarOf(5).currency)
+        assertEquals(Currency.FRANC, Money.francOf(10).currency)
+    }
 }

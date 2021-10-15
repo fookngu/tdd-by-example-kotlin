@@ -1,6 +1,6 @@
 package com.kukot
 
-abstract class Money(protected var amount: Int) {
+abstract class Money(protected val amount: Int, val currency: Currency) {
     override fun equals(other: Any?): Boolean {
         return other is Money && other.javaClass == javaClass && other.amount == amount
     }
@@ -16,4 +16,8 @@ abstract class Money(protected var amount: Int) {
     }
 
     abstract fun times(multiplier: Int): Money
+}
+
+enum class Currency {
+    DOLLAR, FRANC
 }
