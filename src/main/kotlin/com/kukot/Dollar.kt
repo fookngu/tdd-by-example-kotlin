@@ -2,7 +2,7 @@ package com.kukot
 
 class Dollar(amount: Int) : Money(amount) {
 
-    fun times(multiplier: Int): Dollar {
+    override fun times(multiplier: Int): Money {
         val newAmount = multiplier * amount
         return Dollar(newAmount)
     }
