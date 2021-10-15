@@ -47,7 +47,33 @@ class MoneyTest {
         val fiveDollar = Money.ofDollar(5)
         val plusExpression: Expression = fiveDollar.plus(fiveDollar)
         val bank = Bank()
-        val reduced: Money? = bank.reduce(plusExpression, Currency.DOLLAR)
+        val reduced: Money = bank.reduce(plusExpression, Currency.DOLLAR)
         assertEquals(Money.ofDollar(10), reduced)
+    }
+
+    @Test
+    fun testPlusReturnSum() {
+        val fiveDollar = Money.ofDollar(5)
+        val fivePlusSixExpression = fiveDollar.plus(fiveDollar)
+        val sum: Sum = fivePlusSixExpression as Sum
+        assertEquals(fiveDollar, sum.augmend)
+        assertEquals(fiveDollar, sum.addmend)
+        assertEquals(fiveDollar, Money.ofDollar(2).plus(Money.ofDollar(3)))
+    }
+
+    @Test
+    fun testReduceSum() {
+        val sum: Expression = Sum(Money.ofDollar(3), Money.ofDollar(4))
+        val bank = Bank()
+        val result: Money = bank.reduce(sum, Currency.DOLLAR)
+        assertEquals(Money.ofDollar(7), result)
+    }
+
+    @Test
+    fun testReduceMoney() {
+        val bank = Bank()
+        val fiveFranc = Money.ofFranc(5)
+        val reducedMoney = bank.reduce(fiveFranc, Currency.FRANC)
+        assertEquals(reducedMoney, fiveFranc)
     }
 }

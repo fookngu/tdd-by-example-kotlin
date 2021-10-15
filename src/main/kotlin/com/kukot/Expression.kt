@@ -1,3 +1,5 @@
 package com.kukot
 
-interface Expression
+interface Expression {
+    fun reduce(toCurrency: Currency): Money
+}

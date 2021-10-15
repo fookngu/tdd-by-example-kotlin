@@ -1,6 +1,6 @@
 package com.kukot
 
-open class Money(protected val amount: Int, val currency: Currency) : Expression {
+open class Money(val amount: Int, val currency: Currency) : Expression {
     override fun equals(other: Any?): Boolean {
         return other is Money && other.amount == amount && other.currency == currency
     }
@@ -24,7 +24,11 @@ open class Money(protected val amount: Int, val currency: Currency) : Expression
     }
 
     fun plus(appended: Money): Expression {
-        return Money(amount + appended.amount, currency)
+        return Sum(Money(amount, currency), Money(appended.amount, currency))
+    }
+
+    override fun reduce(toCurrency: Currency): Money {
+        return this
     }
 }
 
