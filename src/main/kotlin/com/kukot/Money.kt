@@ -1,21 +1,27 @@
 package com.kukot
 
-abstract class Money(protected val amount: Int, val currency: Currency) {
+open class Money(protected val amount: Int, val currency: Currency) {
     override fun equals(other: Any?): Boolean {
-        return other is Money && other.javaClass == javaClass && other.amount == amount
+        return other is Money && other.amount == amount && other.currency == currency
     }
 
     companion object {
         fun dollarOf(amount: Int): Money {
-            return Dollar(amount)
+            return Money(amount, Currency.DOLLAR)
         }
 
         fun francOf(amount: Int): Money {
-            return Franc(amount)
+            return Money(amount, Currency.FRANC)
         }
     }
 
-    abstract fun times(multiplier: Int): Money
+    fun times(multiplier: Int): Money {
+        return Money(amount * multiplier, currency)
+    }
+
+    override fun toString(): String {
+        return "$amount ${currency.name.capitalize()}"
+    }
 }
 
 enum class Currency {
