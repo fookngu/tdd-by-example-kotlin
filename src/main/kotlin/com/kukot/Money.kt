@@ -1,16 +1,16 @@
 package com.kukot
 
-open class Money(protected val amount: Int, val currency: Currency) {
+open class Money(protected val amount: Int, val currency: Currency) : Expression {
     override fun equals(other: Any?): Boolean {
         return other is Money && other.amount == amount && other.currency == currency
     }
 
     companion object {
-        fun dollarOf(amount: Int): Money {
+        fun ofDollar(amount: Int): Money {
             return Money(amount, Currency.DOLLAR)
         }
 
-        fun francOf(amount: Int): Money {
+        fun ofFranc(amount: Int): Money {
             return Money(amount, Currency.FRANC)
         }
     }
@@ -21,6 +21,10 @@ open class Money(protected val amount: Int, val currency: Currency) {
 
     override fun toString(): String {
         return "$amount ${currency.name.capitalize()}"
+    }
+
+    fun plus(appended: Money): Expression {
+        return Money(amount + appended.amount, currency)
     }
 }
 

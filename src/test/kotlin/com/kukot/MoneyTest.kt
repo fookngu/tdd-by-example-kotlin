@@ -16,29 +16,38 @@ class MoneyTest {
     // common times
     @Test
     fun testMultiplicationMoney() {
-        val fiveDollar = Money.dollarOf(5)
-        val fiveFranc = Money.francOf(5)
-        assertEquals(Money.dollarOf(10), fiveDollar.times(2))
-        assertEquals(Money.francOf(20), fiveFranc.times(4))
+        val fiveDollar = Money.ofDollar(5)
+        val fiveFranc = Money.ofFranc(5)
+        assertEquals(Money.ofDollar(10), fiveDollar.times(2))
+        assertEquals(Money.ofFranc(20), fiveFranc.times(4))
     }
 
     @Test
     fun testEqualityMoney() {
-        assertEquals(Money.dollarOf(7), Money.dollarOf(7))
-        assertEquals(Money.francOf(25), Money.francOf(25))
-        assertNotEquals(Money.dollarOf(10), Money.dollarOf(20))
-        assertNotEquals(Money.francOf(5), Money.dollarOf(5))
+        assertEquals(Money.ofDollar(7), Money.ofDollar(7))
+        assertEquals(Money.ofFranc(25), Money.ofFranc(25))
+        assertNotEquals(Money.ofDollar(10), Money.ofDollar(20))
+        assertNotEquals(Money.ofFranc(5), Money.ofDollar(5))
     }
 
     @Test
     fun testCurrencies() {
-        assertEquals(Currency.DOLLAR, Money.dollarOf(5).currency)
-        assertEquals(Currency.FRANC, Money.francOf(10).currency)
+        assertEquals(Currency.DOLLAR, Money.ofDollar(5).currency)
+        assertEquals(Currency.FRANC, Money.ofFranc(10).currency)
     }
 
     @Test
     fun testMoneyToString() {
-        assertEquals("5 DOLLAR", Money.dollarOf(5).toString())
-        assertEquals("10 FRANC", Money.francOf(10).toString())
+        assertEquals("5 DOLLAR", Money.ofDollar(5).toString())
+        assertEquals("10 FRANC", Money.ofFranc(10).toString())
+    }
+
+    @Test
+    fun testSimpleAddition() {
+        val fiveDollar = Money.ofDollar(5)
+        val plusExpression: Expression = fiveDollar.plus(fiveDollar)
+        val bank = Bank()
+        val reduced: Money? = bank.reduce(plusExpression, Currency.DOLLAR)
+        assertEquals(Money.ofDollar(10), reduced)
     }
 }
